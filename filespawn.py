@@ -1,13 +1,14 @@
+import sys
 
 def spawn_dockerfile(dir, python_ver=3, expose_port=80):
     '''
-    Sets path
+    Sets path. Assumes user has downloaded docker, python, pip
 
     dir: string path of directory
     python_ver: 3 or 2.7
     expose_port: make this port availible to world outside container
     '''
-    with open("Dockerfile", "w") as f:
+    with open(dir+"/Dockerfile", "w") as f:
         f.write("FROM python:"+ str(python_ver) +"\n")
         f.write("WORKDIR /"+ dir+"\n")
         f.write("COPY . /"+ dir+"\n")
@@ -16,4 +17,4 @@ def spawn_dockerfile(dir, python_ver=3, expose_port=80):
         f.write("CMD [\"python\"]"+"\n")
 
 if __name__ == "__main__":
-    spawn_dockerfile("testing")
+    spawn_dockerfile(sys.argv[1])
